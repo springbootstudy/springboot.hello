@@ -4,7 +4,7 @@
 
 	<groupId>com.ctsi</groupId>
 	<artifactId>springboot.hello</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1-snapshot</version>
 	<packaging>jar</packaging>
 
 	<name>springboot.tomcat</name>
@@ -15,6 +15,13 @@
 		<docker.image.prefix>springio</docker.image.prefix>
 		<docker.image.prefix2>192.168.12.129:7709/library</docker.image.prefix2>
 		<docker.image.prefix3>192.168.12.129:7709/ctsi</docker.image.prefix3>
+		<docker.image.prefix4>image.docker.ssdc.solutions/ctsi</docker.image.prefix4>
+		
+		<imageName>image.docker.ssdc.solutions/ctsi/hello</imageName>
+		<imageVersion>1.0.0</imageVersion>
+		
+		<!-- 定义时间格式 -->
+		<maven.build.timestamp.format>yyyy-MM-dd_HH-mm-ss</maven.build.timestamp.format>
 	</properties>
 
 	<parent>
@@ -45,13 +52,20 @@
 			<artifactId>dockerfile-maven-plugin</artifactId>
 			<version>1.4.0</version>
 			<configuration>
-				<repository>${docker.image.prefix2}/${project.artifactId}</repository>
+				<repository>${docker.image.prefix4}/${project.artifactId}</repository>
+				<!-- 
+				   ${maven.build.timestamp} => 2018-08-28T02:12:04Z 不能使用，名称有问题 
+				   需要修改时间戳的格式 <maven.build.timestamp.format>
+				-->
 				<tag>${project.version}-${maven.build.timestamp}</tag>
+				<!-- <repository>${imageName}</repository> -->
+				<!-- <tag>${imageVersion}</tag> -->
 				<buildArgs>
 					<JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
 				</buildArgs>
+				<useMavenSettingsForAuth>true</useMavenSettingsForAuth>
 			</configuration>
-			<executions>
+			<!-- <executions>
 			<execution>
 				<id>default</id>
 				<goals>
@@ -59,7 +73,7 @@
 					<goal>push</goal>
 				</goals>
 			</execution>
-		</executions>
+		</executions> -->
 		</plugin>
 	</plugins>
 	
