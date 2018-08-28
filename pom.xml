@@ -57,9 +57,9 @@
 				   ${maven.build.timestamp} => 2018-08-28T02:12:04Z 不能使用，名称有问题 
 				   需要修改时间戳的格式 <maven.build.timestamp.format>
 				-->
-				<tag>${project.version}-${maven.build.timestamp}</tag>
+				<!-- <tag>${project.version}-${maven.build.timestamp}</tag> -->
 				<!-- <repository>${imageName}</repository> -->
-				<!-- <tag>${imageVersion}</tag> -->
+				<tag>${imageVersion}</tag>
 				<buildArgs>
 					<JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
 				</buildArgs>
