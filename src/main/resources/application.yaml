@@ -4,3 +4,6 @@ server:
     # 默认根路径
     # contextPath: /index
 
+# 控制是否启用 swagger 的开关
+swagger:
+    enable: true
